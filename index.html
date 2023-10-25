@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Page Generator</title>
+    <style>
+        body {
+            font-family: cursive;
+            background-color: #000000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 99vh;
+            color: #fff;
+            border: 1px solid #fff;
+            border-radius: 10px;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #ccffcc;
+        }
+
+        label {
+            font-size: 1.2rem;
+        }
+
+        input[type="number"] {
+            width: 100px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #00e673;
+            border-radius: 10px;
+        }
+
+        button {
+            background-color: #00e673;
+            color: #000000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #00994d;
+            color: #fff;
+        }
+    </style>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+</head>
+</head>
+<body>
+    <h1>Search Page Generator</h1>
+
+    <label for="numberOfPages">Number of Pages (No) :</label>
+    <input type="number" id="numberOfPages" placeholder="Enter a no">
+    
+    <br>
+    
+    <button id="generatePages">Go</button>
+
+    <script>
+        document.getElementById("generatePages").addEventListener("click", function() {
+            generateSearchPages();
+        });
+
+        document.getElementById("numberOfPages").addEventListener("keyup", function(event) {
+            if (event.key === "Enter") {
+                generateSearchPages();
+            }
+        });
+
+        function generateSearchPages() {
+            const numberOfPages = document.getElementById("numberOfPages").value;
+
+            for (let i = 1; i <= numberOfPages; i++) {
+                const randomValue = Math.random().toString(36).substr(2, 5); // Generate a random string
+                const url = `https://www.bing.com/search?q=${randomValue}&qs=n&form=QBRE&sp=-1&lq=0&pq=bjlk9f&sc=10-6&sk=&cvid=9ECD0705B7B342DAAB504F358DB1942E&ghsh=0&ghacc=0&ghpl=`;
+                
+                // Open the search result in a new pop-up window
+                const popupWindow = window.open(url, `_blank_${i}`);
+                
+                // Close the pop-up window after a brief delay (e.g., 2 seconds)
+                setTimeout(function() {
+                    popupWindow.close();
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
